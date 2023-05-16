@@ -1,11 +1,10 @@
-package pages;
+package pageObjects;
 
-import base.BasePage;
+import utility.PageUtil;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class FrontPage extends BasePage {
+public class FrontPage extends PageUtil {
 
     @FindBy(css = "#nav-user-action-bar a[href$='login']")
     private WebElement loginBtn;

@@ -1,10 +1,10 @@
 <suite name="My Test Suite">
     <listeners>
-        <listener class-name="base.tools.TestListeners" />
+        <listener class-name="utility.TestListeners" />
     </listeners>
     <test name="my test">
         <classes>
-            <class>name="suits"</class>
+            <class>name="testCases"</class>
         </classes>
     </test>
 </suite>

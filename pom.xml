@@ -51,7 +51,7 @@
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>base.tools.TestListeners</value>
+                            <value>utility.TestListeners</value>
                         </property>
                     </properties>
                 </configuration>

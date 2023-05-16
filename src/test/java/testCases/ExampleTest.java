@@ -1,15 +1,15 @@
-package suits;
+package testCases;
 
-import base.BasePage;
-import base.tools.Log;
+import utility.PageUtil;
+import utility.Log;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.SkipException;
-import pages.FrontPage;
-import pages.LoginPage;
+import pageObjects.FrontPage;
+import pageObjects.LoginPage;
 
-public class ExampleTest extends BasePage {
+public class ExampleTest extends PageUtil {
     FrontPage frontPage = PageFactory.initElements(driver, FrontPage.class);
     LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
 
