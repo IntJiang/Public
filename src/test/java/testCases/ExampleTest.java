@@ -15,7 +15,6 @@ public class ExampleTest extends PageUtil {
 
     @Test(description = "Example: Login to keylol.com")
     public void example() {
-        driver.get("https://keylol.com/");
         waitForAngularStable();
         Log.debug("Open page: " + driver.getTitle());
 
