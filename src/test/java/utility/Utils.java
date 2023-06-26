@@ -1,5 +1,8 @@
 package utility;
 
+import net.lingala.zip4j.ZipFile;
+import net.lingala.zip4j.exception.ZipException;
+
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -14,8 +17,7 @@ public class Utils {
      * @return
      */
     public Object executeJS(String jsCode, String function, Object... args) {
-        ScriptEngineManager manager = new ScriptEngineManager();
-        ScriptEngine engine = manager.getEngineByName("js");
+        ScriptEngine engine = new ScriptEngineManager().getEngineByName("graal.js");
         Object result = null;
         try {
             engine.eval(jsCode);
@@ -26,5 +28,17 @@ public class Utils {
         }
         return result;
 
+    }
+
+    public void unzip(String source, String destination, char... password){
+        try {
+            ZipFile zipFile = new ZipFile(source);
+            if (zipFile.isEncrypted()) {
+                zipFile.setPassword(password);
+            }
+            zipFile.extractAll(destination);
+        } catch (ZipException e) {
+            e.printStackTrace();
+        }
     }
 }

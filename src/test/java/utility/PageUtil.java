@@ -15,7 +15,6 @@ import static java.time.Duration.ofSeconds;
 
 public class PageUtil extends Utils {
 
-    API api;
     public static String projectPath;
     public static WebDriver driver;
 
@@ -31,7 +30,8 @@ public class PageUtil extends Utils {
             driver = new ChromeDriver(chromeOptions);
         } catch (SessionNotCreatedException e) {
             if (e.getMessage().contains("This version of ChromeDriver only supports Chrome version")) {
-                downloadChromedriver();
+                String chromeVersion = e.getMessage().split("Current browser version is | with binary path")[1];
+                downloadChromedriver(chromeVersion);
                 driver = new ChromeDriver(chromeOptions);
             } else {
                 throw e;
@@ -68,15 +68,16 @@ public class PageUtil extends Utils {
         );
     }
 
-    public void downloadChromedriver() {
+    public void downloadChromedriver(String chromeVersion) {
 //      Referring to https://chromedriver.chromium.org/downloads/version-selection
 
-        String chromeVersion = getChromeVersion();
         String uri = "https://chromedriver.storage.googleapis.com";
         String[] num = chromeVersion.split("\\.");
         String path = "/LATEST_RELEASE_" + chromeVersion.replace("." + num[num.length - 1], "");
-        String driverVersion = api.sendRequest(Method.GET, null, "", uri, path).body().print();
-        String link = "https://chromedriver.storage.googleapis.com/index.html?path=" + driverVersion;
+        String driverVersion = API.sendRequest(Method.GET, null, null, uri, path).body().print();
+        String linkPath = driverVersion + "/chromedriver_win32.zip";
+        assert API.sendAndDownload(uri, linkPath, projectPath + ".\\driver\\chromedriver.zip");
+        unzip(projectPath + ".\\driver\\chromedriver.zip", projectPath + ".\\driver");
     }
 
     public void waitForAngularStable() {
