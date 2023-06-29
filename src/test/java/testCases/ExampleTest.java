@@ -1,5 +1,6 @@
 package testCases;
 
+import utility.Objects.User;
 import utility.PageUtil;
 import utility.Log;
 import org.openqa.selenium.support.PageFactory;
@@ -10,20 +11,22 @@ import pageObjects.FrontPage;
 import pageObjects.LoginPage;
 
 public class ExampleTest extends PageUtil {
-    FrontPage frontPage = PageFactory.initElements(driver, FrontPage.class);
-    LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
+    FrontPage frontPage;
+    LoginPage loginPage;
 
     @Test(description = "Example: Login to keylol.com")
     public void example() {
         waitForAngularStable();
         Log.debug("Open page: " + driver.getTitle());
+        frontPage = new FrontPage();
+        loginPage = new LoginPage();
 
         frontPage.clickLoginBtn();
-        Assert.assertTrue(getPageTitle(driver).startsWith("账号登陆"),
+        Assert.assertTrue(getPageTitle(driver).startsWith("账号登录"),
                 "Incorrect page, current page title is:" + getPageTitle(driver));
-
-        loginPage.enterUsername("503412941@qq.com");
-        loginPage.enterPassword("jzx8315308");
+        User user = users.get("My user");
+        loginPage.enterUsername(user.getEmail());
+        loginPage.enterPassword(user.getPassword());
         loginPage.clickLogin();
 
         Assert.assertTrue(loginPage.isSecCodeVerifyFieldDisplay(), "Secret code verify field is not displayed");

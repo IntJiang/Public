@@ -5,11 +5,12 @@ import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
+import utility.Objects.User;
 
-import java.util.Arrays;
-import java.util.Date;
+import java.util.*;
 
 import static java.time.Duration.ofSeconds;
 
@@ -17,6 +18,7 @@ public class PageUtil extends Utils {
 
     public static String projectPath;
     public static WebDriver driver;
+    public Map<String, User> users = loadUser();
 
     @BeforeTest
     public void beforeTest() {
@@ -47,25 +49,6 @@ public class PageUtil extends Utils {
     @AfterTest
     public void afterTest() {
         driver.close();
-    }
-
-    public String getChromeVersion() {
-        return (String) executeJS(
-                "function getChromeVersion() {\n" +
-                        "        var arr = navigator.userAgent.split(' ');\n" +
-                        "        var chromeVersion = '';\n" +
-                        "        for (var i = 0; i < arr.length; i++) {\n" +
-                        "            if (/chrome / i.test(arr[i]))\n" +
-                        "            chromeVersion = arr[i]\n" +
-                        "        }\n" +
-                        "        if (chromeVersion) {\n" +
-                        "            return Number(chromeVersion.split('/')[1].split('.')[0]);\n" +
-                        "        } else {\n" +
-                        "            return false;\n" +
-                        "        }\n" +
-                        "    }",
-                "getChromeVersion"
-        );
     }
 
     public void downloadChromedriver(String chromeVersion) {

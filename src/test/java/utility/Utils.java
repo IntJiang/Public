@@ -2,11 +2,20 @@ package utility;
 
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import utility.Objects.User;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Utils {
 
@@ -40,5 +49,29 @@ public class Utils {
         } catch (ZipException e) {
             e.printStackTrace();
         }
+    }
+    public JSONObject readJson(String path){
+        try {
+            Object obj = new JSONParser().parse(new FileReader(path));
+            return (JSONObject) obj;
+        }catch (IOException | ParseException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Map<String, User> loadUser(){
+        JSONObject obj = readJson(System.getProperty("user.dir") + "/src/test/resources/accounts.json");
+        Map<String, User> u = new HashMap<>();
+        for(Object key : obj.keySet()){
+            String name = (String) key;
+            JSONObject data = (JSONObject) obj.get(name);
+            String email = (String) data.get("email");
+            String password = (String) data.get("password");
+
+            User user = new User(name, email, password);
+            u.put(name, user);
+        }
+        return u;
     }
 }

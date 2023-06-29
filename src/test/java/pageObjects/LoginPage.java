@@ -4,7 +4,7 @@ import utility.PageUtil;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends PageUtil {
+public class LoginPage extends BasePage {
 
     @FindBy(name="username")
     private WebElement userNameField;
@@ -12,8 +12,12 @@ public class LoginPage extends PageUtil {
     @FindBy(name="password")
     private WebElement passwordField;
 
-    @FindBy(id="login_button_Lzp1k")
+    @FindBy(css=".login_button")
     private WebElement loginBtn;
+
+    public LoginPage(){
+        super();
+    }
 
     public void enterUsername(String name){
         userNameField.clear();
