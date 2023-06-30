@@ -9,7 +9,7 @@ import org.apache.commons.io.IOUtils;
 import java.io.*;
 import java.util.Map;
 
-public class API {
+public class API extends Utils{
 
     public static Response sendRequest(Method method, Map<String, String> headers, String body, String URI, String path, Object... pathParams) {
         RestAssured.baseURI = URI;
