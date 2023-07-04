@@ -1,6 +1,5 @@
 package pageObjects;
 
-import utility.PageUtil;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -37,6 +36,12 @@ public class LoginPage extends BasePage {
     private WebElement secCodeVerifyField;
     public boolean isSecCodeVerifyFieldDisplay(){
         return secCodeVerifyField.isDisplayed();
+    }
+
+    @FindBy(css = ".popuptext")
+    private WebElement popUpWarning;
+    public boolean isPopUpWarningDisplay(){
+        return popUpWarning.isDisplayed();
     }
 
 

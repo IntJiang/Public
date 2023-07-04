@@ -2,3 +2,6 @@
 ```
 mvn test -Dtest="ExampleTest"
 ```
+```
+mvn test -Dtest="APITest"
+```

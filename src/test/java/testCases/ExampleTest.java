@@ -3,7 +3,6 @@ package testCases;
 import utility.Objects.User;
 import utility.PageUtil;
 import utility.Log;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.SkipException;
@@ -29,7 +28,8 @@ public class ExampleTest extends PageUtil {
         loginPage.enterPassword(user.getPassword());
         loginPage.clickLogin();
 
-        Assert.assertTrue(loginPage.isSecCodeVerifyFieldDisplay(), "Secret code verify field is not displayed");
+        Assert.assertTrue(loginPage.isPopUpWarningDisplay(), "Pop up warning is not display");
+//        Assert.assertTrue(loginPage.isSecCodeVerifyFieldDisplay(), "Secret code verify field is not display");
     }
 
     @Test(description = "Desc - Passing a scenario")
